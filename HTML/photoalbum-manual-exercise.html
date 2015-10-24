@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HTML Photo Album</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel='stylesheet' href='photoalbum.css'>
+<link rel='stylesheet' href='http://www.w3schools.com/lib/w3.css'>
+<script src='http://code.jquery.com/jquery-1.11.3.min.js'></script>
+<link rel='stylesheet' href='lib/lightbox2/css/lightbox.css'>
+</head>
+<body>
+
+<header class='w3-container w3-orange w3-center'>
+  <h1>My Photo Album</h1>
+  <h2>Your Name</h2>
+  <p>Here are some photographs and descriptions.</p>
+</header>
+
+<div id='#album'>
+
+  <!-- Start a row of THREE photographs -->
+  <div class='w3-row'>
+
+    <div class='w3-container w3-row w3-col l4'>
+      <div class='w3-container w3-card-8 w3-margin-8'>
+        <div class='w3-container w3-half w3-image'>
+          <a  data-lightbox='John-Lennon' href='b1.png' data-title="John-Lennon"><img src='b1.png' class='example-image w3-circle'></a>
+          <div class='w3-title w3-text-purple'>John</div>
+        </div>
+        <div class='w3-container w3-half'>
+          <p>This is John Lennon. He was one of the Beatles.</p>
+          <p>He was one of the two main song-writers.</p>
+        </div>
+      </div>
+    </div>
+	<div class='w3-container w3-row w3-col l4'>
+      <div class='w3-container w3-card-8 w3-margin-8'>
+        <div class='w3-container w3-half w3-image'>
+          <a  data-lightbox='Paul-McCartney' href='b2.png' data-title="Paul-McCartney" ><img src='b2.png' class='w3-circle'></a>
+          <div class='w3-title w3-text-purple'>Paul</div>
+        </div>
+          <div class='w3-container w3-half'>
+          <p>This is Paul McCartney. He was also one of the Beatles.</p>
+		  <p>He was the other main song-writers</p>
+        </div>
+      </div>
+    </div>
+	<div class='w3-container w3-row w3-col l4'>
+      <div class='w3-container w3-card-8 w3-margin-8'>
+        <div class='w3-container w3-half w3-image'>
+          <a data-lightbox='George-Harrison' href='b3.png' data-title="George-Harrison"><img src='b3.png' class='w3-circle'></a>
+          <div class='w3-title w3-text-purple'>George</div>
+        </div>
+          <div class='w3-container w3-half'>
+          <p>This is George Harrison. He was also one of the Beatles.</p>
+        </div>
+      </div>
+    </div>	
+  </div>
+  
+  
+  <!-- Start another row of THREE photographs -->
+  <div class='w3-row'>
+	<div class='w3-container w3-row w3-col l4'>
+      <div class='w3-container w3-card-8 w3-margin-8'>
+        <div class='w3-container w3-half w3-image'>
+          <a  data-lightbox='Ringo-Starr' href='b4.png' data-title="Ringo-Starr"><img src='b4.png' class='w3-circle'></a>
+          <div class='w3-title w3-text-purple'>Ringo</div>
+        </div>
+        <div class='w3-container w3-half'>
+          <p>This is Ringo Starr. He was also one of the Beatles.</p>
+        </div>
+      </div>
+	 </div>
+	</div>
+  
+</div>
+
+
+
+<footer class='w3-container w3-orange w3-padding-jumbo'>
+	<div class='w3-container w3-center'>
+		<a href='mailto:childm@lsbu.ac.uk' class='link'>Contact me</a>
+	</div>
+</footer>
+<script src='lib/lightbox2/js/jquery.js'></script>
+<script src='lib/lightbox2/js/lightbox.js'></script>
+</body>
+</html>
+        
