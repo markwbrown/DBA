@@ -25,6 +25,10 @@ print "</h1>";
 print "<h1>The time is: ";
 print date("G:i:s a e P");
 print "</h1>";
+print "<h1>There are ";
+print mktime(00,00,00,01,01,2016, -mktime());
+print " seconds left in the year until next year";
+print "</h1>";
 ?>
 
 <?php
