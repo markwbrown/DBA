@@ -51,9 +51,73 @@ div {
 	float: right;
 }
 
+#nav{
+	background-color:#778899;
+}
+
+#nav_wrapper{
+	width: 0 auto;
+	margin: 0 auto;
+	text-align: left;
+	
+}
+
+#nav ul{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	position: relative;
+}
+
+#nav ul li{
+	display:inline-block;
+
+}
+
+#nav ul li:hover{
+	background-color: #333;
+}
+
+#nav ul li a,visited{
+	color:#ccc;
+	display: block;
+	padding: 15px;
+	text-decoration: none;
+
+}
+
+#nav ul li a:hover{
+	color: #ccc;
+	text-decoration: none;
+}
+
+#nav ul li:hover ul{
+	display: block;
+}
+
+#nav ul ul{
+	display: none;
+	position: absolute;
+	background-color: #333;
+	border: 5px solid #778899;
+	border-top: 0;
+	margin-left: -5px;
+}
+
+#nav ul ul li{
+	display: block;
+}
+
+#nav ul ul li a,visited{
+	color: #ccc;
+}
+
+#nav ul ul li a:hover{
+	color: #099;
+}
 
 @media only screen and(min-width: 512px) {
-.block{
+	.block{
 		width: 100%;
 	}
 }

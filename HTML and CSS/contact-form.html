@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact Form</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel='stylesheet' href='http://www.w3schools.com/lib/w3.css'>
+</head>
+<body class='w3-padding-large'>
+
+<h1>Contact Form</h1>
+
+<form action='sendemail.php' method='post' class='w3-padding-large w3-card-16'>  
+  <div class='w3-group'>   
+    <input type='text' name='firstname' class='w3-input' required>
+    <label class='w3-label'>First name</label>
+  </div>
+  <div class='w3-group'>   
+    <input type='text' name='lastname' class='w3-input' required>
+    <label class='w3-label'>Last name</label>
+  </div>
+  <div class='w3-group'>   
+    <textarea name='message' class='w3-input' required></textarea>
+    <label class='w3-label'>Message</label>
+  </div>
+  <input type='submit' value='Send to website owner' class='w3-btn'>
+</form>
+
+</body>
+</html>
