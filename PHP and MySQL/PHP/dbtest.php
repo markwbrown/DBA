@@ -9,7 +9,7 @@
   table {
     border-collapse: collapse;  
   }
-  tr:nth-of-type(odd) {
+  tr:nth-of-type(odd) { 
     background: #ffff99;
   }
   tr:nth-of-type(even) {
@@ -47,6 +47,8 @@ print "</pre>\n";
 print"<h2>Result:</h2>";
 htmlTable( $pdo, 'demotable');
 
+importTable( $pdo, 'books', 'books.txt');
+htmlTable( $pdo, 'books');
 ?>
 
 </body>
