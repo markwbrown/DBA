@@ -52,7 +52,7 @@ for( $i = 0; $i < $numberOfPhotos; $i++) {
   print "  <div class='w3-container w3-row w3-col l4'>\n";
   print "    <div class='w3-container w3-card-8 w3-margin-8'>\n";
   print "      <div class='w3-container w3-half w3-image'>\n";
-  print "        <a class='example-image-link' data-lightbox='example-1' href=".$row['image']."><img src=".$row['image']." class='example-image w3-circle'></a>\n";
+  print "        <a class='example-image-link' data-lightbox='example-1' href='images/".$row['image']."'><img src='images/".$row['image']."' class='example-image w3-circle'></a>\n";
   print "        <div class='w3-title w3-text-purple'>".$row['name']."</div>\n";
   print "      </div>\n";
   print "      <div class='w3-container w3-half'>\n";

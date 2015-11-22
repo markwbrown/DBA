@@ -21,9 +21,11 @@ else if (isset($_GET['feeling']) and $_GET['feeling']=='sad'){
   print "<h1>Oh dear, why are you feeling sad?</h1>\n";
 }
 else if (isset($_GET['feeling']) and $_GET['feeling']=='fruity') {
-	print"<h1>Ooh la la, mais les fruits sont bons!<h1>\n";
+	print"<h1>Ooh la la, mais les fruits sont bons!</h1>\n";
 } 
-else {
+else if(isset($_GET['feeling']) and $_GET['feeling']=='Anger') {
+	print "<h1>Oh dear, why are you feeling Angry!</h1>\n";
+} else {
 	print "<h1> so tell me how you feel today?</h1>\n";
 }
 ?>
@@ -51,6 +53,12 @@ else if ($_GET['feeling']=='fruity'){
 	print date("G:i l jS Y");
 	print"\n</div>";
 	}
+else if ($_GET['feeling']=='Anger'){
+	print "\n<img src='images/Anger.jpg' class='w3-image'>";
+	print "\n<div class='w3-title w3-text-white'>";
+	print date("G:i l jS Y");
+	print"\n</div>";
+}
 print"\n</div>";
 
 ?>
@@ -67,6 +75,9 @@ print "\n<a href='?feeling=sad'>Click here to feel sad!</a>";
 print "\n</div>";
 print "\n<div class='w3-card-16 w3-white w3-third w3-center'>";
 print "\n<a href='?feeling=fruity'>Click here to feel fruity!</a>";
+print "\n</div>";
+print "\n<div class='w3-card-16 w3-white w3-third w3-center'>";
+print "\n<a href='?feeling=Anger'>Click here to feel Angry!</a>";
 print "\n</div>";
 ?>
 </footer>
