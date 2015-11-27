@@ -1,0 +1,5 @@
+photoid	user	image	name	description
+1	self	b1.png	John	<p>This is John Lennon. He was one of the Beatles.</p><p>He was one of the two main song-writers.</p>
+2	self	b2.png	Paul	<p>This is Paul McCartney. He was also one of the Beatles.</p><p>He was the other main song-writers.</p>
+3	self	b3.png	George	<p>This is George Harrison. He was also one of the Beatles.</p>
+4	self	b4.png	Ringo	<p>This is Ringo Starr. He was also one of the Beatles.</p>

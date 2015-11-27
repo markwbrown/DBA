@@ -17,7 +17,8 @@ require_once "lib/dbutils.php";
   $results = $pdo->query("SELECT * FROM books", PDO::FETCH_ASSOC);
   foreach( $results as $row) {
     print("<tr>");
-    print("<td>".$row['bookid']."</td>");
+    print("<td><img src='images/".$row['image']."'height=30%'>".$row['bookid']."</td>");
+	print("<td><a href='bookview.php?bookid=".$row[bookid]."'>".$row['title']."</a></td>");
     print("<td>".$row['title']."</td>");
     print("<td>".$row['publisher']."</td>");
     print("<td>".$row['price']."</td>");

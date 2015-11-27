@@ -47,8 +47,10 @@ print "</pre>\n";
 print"<h2>Result:</h2>";
 htmlTable( $pdo, 'demotable');
 
-importTable( $pdo, 'books', 'books.txt');
+//importTable( $pdo, 'books', 'books.txt');
 htmlTable( $pdo, 'books');
+
+htmlTable($pdo, 'photographs');
 ?>
 
 </body>

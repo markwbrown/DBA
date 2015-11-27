@@ -1,5 +1,5 @@
 <?php
-require_once "lib/dbutils.php";
+require_once ('lib/dbutils.php');
 ?>
 <html>
 <body>
@@ -10,7 +10,7 @@ foreach( $results as $row) {
   print("<tr>");
   print("<h1>".$row['title']."</h1>");
   print("<table><tr>");
-  print("<td valign='top'><img src=''></td>");
+  print("<td valign='top'><img src='images/".$row['image']."'></td>");
   print("<td>".$row['description']."</td>");
   print("</tr></table>");
   print("<ul>");

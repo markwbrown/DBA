@@ -104,7 +104,51 @@ function importTable( $pdo, $table, $file) {
     }
     $pdo->exec( $sql);
   }
-  print ($numLines)." rows imported into table $table.";
+  print ($numLines - 1)." rows imported into table $table.";
+}
+
+function setUpSession() {
+  session_start();
+  if ( !isset( $_SESSION['user'])) {
+    $_SESSION['user'] = "anonymous";
+  }
+  if ( !isset( $_SESSION['role'])) {  
+    $_SESSION['role'] = "anonymous";
+  }
+}
+
+/*
+Session variables are set to anonymous IF THEY HAVE NO VALUE or if
+a log in attempt is made and the credentials fail, or if a logout
+attempt is made. If nothing is attempted and values are set, they
+stay the same. 
+*/
+function logInOrOut( $pdo, $usersTable) {
+  setUpSession();
+  
+  $action = "none";
+  if ( isset( $_POST['formid']) && $_POST['formid'] == 'login') {
+    $stmt = $pdo->prepare("SELECT * FROM `$usersTable` WHERE user=? AND password=?");
+    $stmt->execute( array( $_POST['username'], $_POST['password']));
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ( count( $rows) == 1) {
+      $_SESSION['user'] = $rows[0]['user'];
+      $_SESSION['role'] = $rows[0]['role'];
+      $action = "login success";
+    } else if ( count( $rows) == 0) {
+      $action = "login failure";
+      $_SESSION['user'] = "anonymous";
+      $_SESSION['role'] = "anonymous";
+    } else {
+      die( "System error: ".count( $rows)." rows in database for user ".$_POST['username']);
+    }
+  } else if ( isset( $_REQUEST['logout'])) {
+    $_SESSION['user'] = "anonymous";
+    $_SESSION['role'] = "anonymous";
+    $action = "logout";
+  }
+
+  return $action;
 }
 
 
