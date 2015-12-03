@@ -1,0 +1,26 @@
+
+.link {
+	color: blue;
+	font-weight: bold;
+	text-decoration: none;
+}
+.link:hover {
+	background: orange;
+}
+
+.errormessage {
+	border: solid 2px red;
+	color: red;
+	font-weight: bold;
+	text-align: center;
+	margin: 16px;
+}
+
+.message {
+	border: solid 2px blue;
+	color: blue;
+	font-weight: bold;
+	text-align: center;
+	margin: 16px;
+}
+
