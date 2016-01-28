@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JSON Photo Album</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel='stylesheet' href='http://www.w3schools.com/lib/w3.css'>
+<link rel='stylesheet' href='lib/lightbox2/css/lightbox.css'>
+<link rel='stylesheet' href='photoalbum.css'>
+
+<script src='http://code.jquery.com/jquery-1.11.3.min.js'></script>
+
+<script>
+
+function createPhotoHTML( photoInfo) {
+  return "  <div class='w3-container w3-row w3-col l4'>" +
+         "    <div class='w3-container w3-card-8 w3-margin-8'>" + 
+         "       <div class='w3-container w3-half w3-image'>" +
+         "        <a class='example-image-link' data-lightbox='example-1' href='images/" + photoInfo.image + "'><img src='images/" + photoInfo.image + "' class='example-image w3-circle'></a>" +
+         "        <div class='w3-title w3-text-purple'>" + photoInfo.name + "</div>" +
+         "      </div>" +
+         "      <div class='w3-container w3-half'>" + photoInfo.description +         
+		 // next line should be conditional on whether logged in or not
+         "      <span class='link deletelink' id='" + photoInfo.photoid + "'>(Delete)</span>" + 
+        
+         "      </div>" + 
+         "    </div>" +
+         "  </div>";
+}
+
+function loadPhotos() {
+    $.getJSON( "json-photoalbum-photos.php", 
+                 function( photos) { 
+                  $('#album').empty();
+                  for (i = 0; i < photos.length; i += 3) {
+                    var rowDiv = $( "<div class='w3-row'>");
+                    $('#album').append( rowDiv);
+                    for( j = i; j < i + 3; j++ ) {
+                      if ( j < photos.length) {
+                        rowDiv.append( createPhotoHTML( photos[j]));  
+                      }
+                    }
+                  }
+				  // add listener to all deletelinks
+					$('.deletelink').click( 
+					function( event) { 
+                    //alert('Photo id: ' + event.target.id);
+					deletePhoto(event);
+					}
+					);
+                }
+              );
+  }
+function deletePhoto( event) {
+  $.post( "json-photoalbum-delete.php",
+          "deletionid=" + event.target.id, 
+          function( data) {
+            if ( data.result != "success") {
+              alert( "ERROR: " + data.error);
+            } else {
+              loadPhotos();
+            }
+          });
+}
+
+  
+  $( document).ready(
+    function() {
+      loadPhotos();  
+    }
+  );
+
+ 
+  
+</script>
+
+</head>
+<body>
+
+<header class='w3-container w3-orange w3-center'>
+  <h1>My Photo Album</h1>
+  <h2>Timothy Lam</h2>
+  <p>Here are some photographs and descriptions.</p>
+</header>
+
+<div id='message'>
+
+</div>
+
+<div id='album'>
+
+</div>
+
+<footer class='w3-container w3-orange w3-padding-jumbo'>
+  <div class='w3-container w3-center'>
+    <a href='mailto:lamt3@lsbu.ac.uk' class='link'>Contact me</a>
+  </div>  
+</footer>
+
+<script src='lib/lightbox2/js/lightbox.js'></script>
+</body>
+</html>

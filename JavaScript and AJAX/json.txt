@@ -1,0 +1,12 @@
+[
+  { 
+    "image": "b3.png",  
+    "name": "FAKED", 
+    "description": "<p>This is JSON data read from a plain text file.</p>" 
+  },
+  { 
+    "image": "b4.png",  
+    "name": "JSON", 
+    "description": "<p>A better idea would be to read it from a dynamic process.</p>" 
+  }
+]

@@ -1,0 +1,18 @@
+<html>
+<head>
+<script src='http://code.jquery.com/jquery-1.11.3.min.js'></script>
+<script>
+$(document).ready(
+  function() {
+    $("h1").click( function( event) {
+      alert( "You clicked: " + event.target.innerHTML);
+    })
+  }
+);
+</script>
+</head>
+<body>
+<h1>Click Me</h1>
+<h1>Click me too!</h1>
+</body>
+</html>
