@@ -83,6 +83,28 @@ function htmlTable( $pdo, $table) {
   print "</table>";  
 }
 
-
+function importTable( $pdo, $table, $file) {
+  $data = file( $file, FILE_IGNORE_NEW_LINES);
+  $numLines = count( $data);
+  $columns = explode("\t",$data[0]);
+  for( $i = 1; $i < $numLines; $i++) {
+    $values = explode("\t", $data[$i]);
+    $sql = "INSERT INTO `$table` SET ";
+    for( $j = 0; $j < count( $columns); $j++) {
+      if ( $j > 0) {
+        $sql .= ", ";
+      }      
+      $sql .= "`".$columns[$j]."`=";
+      // permit specifying NULL values with the word NULL
+      if ( $values[$j] == 'NULL') {
+        $sql .= "NULL";  
+      } else {
+        $sql .= "'".$values[$j]."'";  
+      }      
+    }
+    $pdo->exec( $sql);
+  }
+  print ($numLines - 1)." rows imported into table $table.";
+}
 
 ?>

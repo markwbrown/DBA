@@ -76,7 +76,9 @@ for( $i = 0; $i < $numberOfPhotos; $i++) {
   print "      </div>\n";
   print "      <div class='w3-container w3-half'>\n";
   print $row['description']."\n";
-  print "      <a href='?deletionid=".$row['photoid']."' class='link'>(Delete)</a>";
+  if ( $_SESSION['user'] != "anonymous") {
+	  print "      <a href='?deletionid=".$row['photoid']."' class='link'>(Delete)</a>";
+  }
   print "      </div>\n";
   print "    </div>\n";
   print "  </div>\n";  
@@ -84,13 +86,13 @@ for( $i = 0; $i < $numberOfPhotos; $i++) {
 
 print "</div>\n";
 
-
+print "<div class='w3-container w3-center'>";
+if($_SESSION['user'] != "anonymous") {
+	print "<a href='#id01' class='link'>Add images</a>";
+}
+print"</div>";
 
 ?>
-<div class='w3-container w3-center'>
-  <a href="#id01" class='link'>Add images</a>
-</div>
-
 <div id="id01" class="w3-modal">
   <div class="w3-modal-dialog">
     <div class="w3-modal-content w3-card-4">

@@ -152,4 +152,6 @@ function logInOrOut( $pdo, $usersTable) {
 }
 
 
+
+
 ?>

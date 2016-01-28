@@ -23,32 +23,19 @@ require_once("photoalbum-common.php");
 <?php
 
 $pdo = connect();
-logInOrOut( $pdo, 'users');
 
-
-if ( $_SESSION['user'] != "anonymous") {
-	if ( isset( $_GET['deletionid'])) {
-		$errorMessage = deletePhotograph( $pdo, $_GET['deletionid']);
-		if ( $errorMessage != "") {
-			print "<div class='errormessage'>$errorMessage</div>\n";
-		} else {
-			print "<div class='message'>Image deleted.</div>\n";    
-		}
-	}
-
-	if ( isset( $_POST['formid']) && $_POST['formid'] == 'fileupload') {
-	$photoid = addPhotograph( $pdo, $_POST['name'], $_POST['description'], 'self', $_FILES['uploadfile']);
-	}
-	
+if ( isset( $_GET['deletionid'])) {
+  $errorMessage = deletePhotograph( $pdo, $_GET['deletionid']);
+  if ( $errorMessage != "") {
+    print "<div class='errormessage'>$errorMessage</div>\n";
+  } else {
+    print "<div class='message'>Image deleted.</div>\n";    
+  }
 }
 
-print "<div class='w3-container w3-center'>\n";
-if ( $_SESSION['user'] == "anonymous") {
-  print "  <a href='#id02' class='link'>Log in</a>\n";
-} else {
-  print "  User: ".$_SESSION['user']." Role: ".$_SESSION['role']." <a href='?logout=true' class='link'>Log out</a>\n";
+if ( isset( $_POST['formid']) && $_POST['formid'] == 'fileupload') {
+  $photoid = addPhotograph( $pdo, $_POST['name'], $_POST['description'], 'self', $_FILES['uploadfile']);
 }
-print "</div>\n";
 
 
 
@@ -85,7 +72,6 @@ for( $i = 0; $i < $numberOfPhotos; $i++) {
 print "</div>\n";
 
 
-
 ?>
 <div class='w3-container w3-center'>
   <a href="#id01" class='link'>Add images</a>
@@ -101,7 +87,7 @@ print "</div>\n";
       <div class="w3-container">
         <form action='?' method='post' enctype='multipart/form-data' id='photoform' class='w3-container'>
           <div class="w3-group">
-            <input type='file' name='uploadfile' class='w3-input'>
+            <input type='file' name='uploads[]' multiple='multiple' class='w3-input'>
             <label class="w3-label">Image file</label>
           </div>
           <div class="w3-group">   
@@ -113,37 +99,11 @@ print "</div>\n";
             <label class="w3-label">Description</label>
           </div>
           <input type='hidden' name='formid' value='fileupload'>
+
           <input type='submit' value='Upload' id='uploadbutton' class='w3-btn'>
         </form>
       </div>
       <footer class="w3-container w3-teal">
-        <p></p>
-      </footer>
-    </div>
-  </div>
-</div>
-<div id='id02' class='w3-modal'>
-  <div class='w3-modal-dialog'>
-    <div class='w3-modal-content w3-card-4'>
-      <header class='w3-container w3-teal'> 
-        <a href='#' class='w3-closebtn'>&times;</a>
-        <h2>Log in</h2>
-      </header>
-      <div class='w3-container'>
-        <form action='?' method='post' id='loginform' class='w3-container'>          
-          <div class='w3-group'>   
-            <input type='text' name='username' size='16' class='w3-input'>
-            <label class='w3-label'>Username</label>
-          </div>
-          <div class='w3-group'>   
-            <input type='password' name='password' size='16' class='w3-input'>
-            <label class='w3-label'>Password</label>
-          </div>
-          <input type='hidden' name='formid' value='login'>
-          <input type='submit' value='Log in' id='loginbutton' class='w3-btn'>
-        </form>
-      </div>
-      <footer class='w3-container w3-teal'>
         <p></p>
       </footer>
     </div>

@@ -26,15 +26,13 @@ $pdo = connect();
 
 if ( isset( $_GET['deletionid'])) {
   $errorMessage = deletePhotograph( $pdo, $_GET['deletionid']);
+  
   if ( $errorMessage != "") {
     print "<div class='errormessage'>$errorMessage</div>\n";
   } else {
     print "<div class='message'>Image deleted.</div>\n";    
   }
-}
-
-if ( isset( $_POST['formid']) && $_POST['formid'] == 'fileupload') {
-  $photoid = addPhotograph( $pdo, $_POST['name'], $_POST['description'], 'self', $_FILES['uploadfile']);
+    
 }
 
 $sql = "SELECT * FROM `photographs` ORDER BY `photoid`";
@@ -60,7 +58,7 @@ for( $i = 0; $i < $numberOfPhotos; $i++) {
   print "      </div>\n";
   print "      <div class='w3-container w3-half'>\n";
   print $row['description']."\n";
-  print "      <a href='?deletionid=".$row['photoid']."' class='link'>(Delete)</a>";
+  print "      <a href='?deletionid=".$row['photoid']."onclick="return confirm('Are you sure you want to delete this?)' class='link'>"(Delete)</a>";
   print "      </div>\n";
   print "    </div>\n";
   print "  </div>\n";  
@@ -70,43 +68,6 @@ print "</div>\n";
 
 
 ?>
-<div class='w3-container w3-center'>
-  <a href="#id01" class='link'>Add images</a>
-</div>
-
-<div id="id01" class="w3-modal">
-  <div class="w3-modal-dialog">
-    <div class="w3-modal-content w3-card-4">
-      <header class="w3-container w3-teal"> 
-        <a href="#" class="w3-closebtn">&times;</a>
-        <h2>Upload photograph</h2>
-      </header>
-      <div class="w3-container">
-        <form action='?' method='post' enctype='multipart/form-data' id='photoform' class='w3-container'>
-          <div class="w3-group">
-            <input type='file' name='uploadfile' class='w3-input'>
-            <label class="w3-label">Image file</label>
-          </div>
-          <div class="w3-group">   
-            <input type='text' name='name' class='w3-input' required>
-            <label class="w3-label">Name</label>
-          </div>
-          <div class="w3-group">   
-            <textarea name='description' class='w3-input' required></textarea>
-            <label class="w3-label">Description</label>
-          </div>
-          <input type='hidden' name='formid' value='fileupload'>
-
-          <input type='submit' value='Upload' id='uploadbutton' class='w3-btn'>
-        </form>
-      </div>
-      <footer class="w3-container w3-teal">
-        <p></p>
-      </footer>
-    </div>
-  </div>
-</div>
-
 <footer class='w3-container w3-orange w3-padding-jumbo'>
 	<div class='w3-container w3-center'>
 		<a href='mailto:childm@lsbu.ac.uk' class='link'>Contact me</a>

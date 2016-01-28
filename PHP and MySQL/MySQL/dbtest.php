@@ -47,7 +47,6 @@ print "</pre>\n";
 print"<h2>Result:</h2>";
 htmlTable( $pdo, 'demotable');
 
-
 ?>
 
 </body>
