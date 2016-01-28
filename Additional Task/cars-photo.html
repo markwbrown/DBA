@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JSON Cars Photo Album</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel='stylesheet' href='http://www.w3schools.com/lib/w3.css'>
+<link rel='stylesheet' href='lib/lightbox2/css/lightbox.css'>
+<link rel='stylesheet' href='photoalbum.css'>
+
+<script src='http://code.jquery.com/jquery-1.11.3.min.js'></script>
+<script src='lib/ajaxupload/jquery-fileupload.min.js'></script>
+
+<script>
+var user = "anonymous";
+var role = "anonymous";
+
+function createPhotoHTML( photoInfo) {
+  return "  <div class='w3-container w3-row w3-col l4'>" +
+         "    <div class='w3-container w3-card-8 w3-margin-8'>" + 
+         "       <div class='w3-container w3-half w3-image'>" +
+         "        <a class='example-image-link' data-lightbox='example-1' href='images/" + photoInfo.image + "'><img src='images/" + photoInfo.image + "' class='example-image w3-circle'></a>" +
+         "        <div class='w3-title w3-text-purple'>" + photoInfo.name + "</div>" +
+         "      </div>" +
+         "      <div class='w3-container w3-half'>" + photoInfo.description +         
+		 // next line should be conditional on whether logged in or not
+         (( user != "anonymous") ? "<span class='link deletelink' id='" + photoInfo.photoid + "'>(Delete)</span>" : "") +         
+         "      </div>" + 
+         "    </div>" +
+         "  </div>";
+}
+
+function loadPhotos() {
+    $.getJSON( "json-carphotoalbum-photos.php", 
+                 function( photos) { 
+                  $('#album').empty();
+                  for (i = 0; i < photos.length; i += 3) {
+                    var rowDiv = $( "<div class='w3-row'>");
+                    $('#album').append( rowDiv);
+                    for( j = i; j < i + 3; j++ ) {
+                      if ( j < photos.length) {
+                        rowDiv.append( createPhotoHTML( photos[j]));  
+                      }
+                    }
+                  }
+				  // add listener to all deletelinks
+					$('.deletelink').click( 
+					function( event) { 
+                    //alert('Photo id: ' + event.target.id);
+					deletePhoto(event);
+					}
+					);
+                }
+              );
+  }
+function deletePhoto( event) {
+  $.post( "json-carphotoalbum-delete.php",
+          "deletionid=" + event.target.id, 
+          function( data) {
+            if ( data.result != "success") {
+              alert( "ERROR: " + data.error);
+            } else {
+              loadPhotos();
+            }
+          });    
+}
+
+function renderUserInformation() {
+  $('#userinfo').empty();
+  if ( user == "anonymous") {
+    $('#userinfo').append( "<a href='#id02' class='link'>Log in</a>");
+    $('#addlink').hide( "<a href='#id01' class='link'>Add images</a>");
+  } else {
+    $('#userinfo').append( "User: " + user + " Role: " + role + " <a href='#' class='link' onclick='logout()'>Log out</a>");
+    $('#addlink').show( "<a href='#id01' class='link'>Add images</a>");
+  }
+}
+
+function login() {
+  $.post( "json-photoalbum-logon.php", 
+           $('#loginform').serialize(),
+             function( data) { 
+               user = data.user;
+               role = data.role;
+               renderUserInformation();
+               loadPhotos();  
+               $('#loginform').get(0).reset();
+               location.href='#'; 
+               alert( data.action + " " + data.user + " " + data.role);
+             }
+           );
+}
+
+function logout() {
+  $.getJSON( "json-photoalbum-logon.php?logout=true", 
+             function( data) { 
+               user = data.user;
+               role = data.role;
+               renderUserInformation();
+               loadPhotos();  
+               location.href='#'; 
+               //alert( data.action + " " + data.user + " " + data.role);
+             }
+           );
+}
+
+  
+  $( document).ready(
+    function() {
+      loadPhotos();
+		$('#photoform').fileUpload({
+        beforeSubmit :
+          function(uploadData){ console.log(uploadData); return true; }, 
+          // access the data returned by the upload return false to stop the submit ajax call
+        success :
+          function(data, textStatus, jqXHR){ }, 
+          // Callback for the submit success ajax call
+        error :
+          function(jqXHR, textStatus, errorThrown){ alert( "error"); console.log(jqXHR); },
+          // Callback if an error happens with your upload call or the submit call
+        complete :
+          function(jqXHR, textStatus){ $('#photoform').get(0).reset(); location.href='#'; loadPhotos(); } 
+          // Callback on completion
+		}); 
+
+	    $('#loginform').submit(  
+			function( event) {
+			event.preventDefault();
+        login();
+	 }
+	);
+  }
+);
+
+ 
+  
+</script>
+
+</head>
+<body>
+
+<header class='w3-container w3-blue w3-center'>
+  <h1>My Cars Photo Album</h1>
+  <h2>Timothy Lam</h2>
+  <p>Here are some cars photographs and descriptions.</p>
+</header>
+
+<div class='w3-container w3-center' id='userinfo'>
+<a href="#id02" class='link'>Log in</a>
+</div>
+
+
+<div id='message'>
+
+</div>
+
+<div id='album'>
+
+</div>
+
+<div class='w3-container w3-center' id='addlink'>
+<a href="#id01" class='link'>Add images</a>
+</div>
+
+<div id="id01" class="w3-modal">
+  <div class="w3-modal-dialog">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-teal"> 
+        <a href="#" class="w3-closebtn">&times;</a>
+        <h2>Upload photograph</h2>
+      </header>
+      <div class="w3-container">
+        <form action='json-photoalbum-upload.php' method='post' enctype='multipart/form-data' id='photoform' class='w3-container'>
+          <div class="w3-group">
+            <input type='file' name='uploadfile' class='w3-input'>
+            <label class="w3-label">Image file</label>
+          </div>
+          <div class="w3-group">   
+            <input type='text' name='name' class='w3-input' required>
+            <label class="w3-label">Name</label>
+          </div>
+          <div class="w3-group">   
+            <textarea name='description' class='w3-input' required></textarea>
+            <label class="w3-label">Description</label>
+          </div>
+          <input type='hidden' name='formid' value='fileupload'>
+
+          <input type='submit' value='Upload' id='uploadbutton' class='w3-btn'>
+        </form>
+      </div>
+      <footer class="w3-container w3-teal">
+        <p></p>
+      </footer>
+    </div>
+  </div>
+</div>
+
+
+<div id='id02' class='w3-modal'>
+  <div class='w3-modal-dialog'>
+    <div class='w3-modal-content w3-card-4'>
+      <header class='w3-container w3-teal'> 
+        <a href='#' class='w3-closebtn'>&times;</a>
+        <h2>Log in</h2>
+      </header>
+      <div class='w3-container'>
+        <form action='json-photoalbum-logon.php' method='post' id='loginform' class='w3-container'>          
+          <div class='w3-group'>   
+            <input type='text' name='username' size='16' class='w3-input'>
+            <label class='w3-label'>Username</label>
+          </div>
+          <div class='w3-group'>   
+            <input type='password' name='password' size='16' class='w3-input'>
+            <label class='w3-label'>Password</label>
+          </div>
+          <input type='hidden' name='formid' value='login'>
+          <input type='submit' value='Log in' id='loginbutton' class='w3-btn'>
+        </form>
+      </div>
+      <footer class='w3-container w3-teal'>
+        <p></p>
+      </footer>
+    </div>
+  </div>
+</div>
+<footer class='w3-container w3-blue w3-padding-jumbo'>
+  <div class='w3-container w3-center'>
+    <a href='mailto:lamt3@lsbu.ac.uk' class='link'>Contact me</a>
+  </div>  
+</footer>
+
+<script src='lib/lightbox2/js/lightbox.js'></script>
+</body>
+</html>
