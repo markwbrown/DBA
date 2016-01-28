@@ -1,0 +1,17 @@
+
+Tea
+
+Tea is an aromatic beverage commonly prepared by pouring hot or boiling water over cured leaves of the Camellia sinensis, an evergreen shrub native to Asia. After water, it is the most widely consumed drink in the world. Some teas, like Darjeeling and Chinese greens, have a cooling, slightly bitter, and astringent flavour, while others have vastly different profiles that include sweet, nutty, floral, or grassy notes.
+
+Coffee
+
+Coffee is a brewed drink prepared from roasted coffee beans, which are the seeds of berries from the Coffea plant. Coffee plants are cultivated in over 70 countries, primarily in the equatorial regions of the Americas, Southeast Asia, India and Africa. The two most commonly grown are the highly regarded arabica, and the less sophisticated but stronger and more hardy robusta.
+
+Hot Chocolate
+
+Hot chocolate, also known as hot cocoa, is a heated beverage consisting of shaved chocolate, melted chocolate or cocoa powder, heated milk or water, and often sugar. Hot chocolate made with melted chocolate is sometimes called drinking chocolate, characterized by less sweetness and a thicker consistency.
+
+For the images you should link directly to these wikipedia files:
+https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Meissen-teacup_pinkrose01.jpg/330px-Meissen-teacup_pinkrose01.jpg
+https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/413px-A_small_cup_of_coffee.JPG
+https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Becher_Kakao_mit_Sahneh%C3%A4ubchen.JPG/375px-Becher_Kakao_mit_Sahneh%C3%A4ubchen.JPG
